@@ -1,3 +1,5 @@
+const WebSocket = require('ws');
+
 const wsUrl = 'wss://us-pconnect7.coolkit.cc:443/api/ws';
 
 const authData = {
@@ -27,21 +29,21 @@ function log(message) {
 
 const ws = new WebSocket(wsUrl);
 
-ws.onopen = () => {
+ws.on('open', () => {
     log(`Conectado a WebSocket en ${wsUrl}`);
     ws.send(JSON.stringify(authData));
     log(`Mensaje de autenticación enviado: ${JSON.stringify(authData)}`);
-};
+});
 
-ws.onmessage = (event) => {
-    log(`Mensaje recibido: ${event.data}`);
-    const message = JSON.parse(event.data);
+ws.on('message', (data) => {
+    log(`Mensaje recibido: ${data}`);
+    const message = JSON.parse(data);
     if (message.error === 0 && message.config && message.config.hbInterval) {
         setTimeout(() => {
             const controlDataWithSequence = { ...controlData, sequence: Date.now().toString() };
             ws.send(JSON.stringify(controlDataWithSequence));
             log(`Enviando mensaje de control para encender: ${JSON.stringify(controlDataWithSequence)}`);
-        }, 10); // Pausa de 2000 milisegundos (2 segundos) antes de enviar el comando
+        }, 2000); // Pausa de 2000 milisegundos (2 segundos) antes de enviar el comando
         setInterval(() => {
             ws.send('ping');
             log('Heartbeat enviado');
@@ -57,12 +59,12 @@ ws.onmessage = (event) => {
             log(`Error al ejecutar el comando: ${message.error}`);
         }
     }
-};
+});
 
-ws.onclose = () => {
+ws.on('close', () => {
     log('Conexión WebSocket cerrada');
-};
+});
 
-ws.onerror = (error) => {
+ws.on('error', (error) => {
     log(`Error en WebSocket: ${error.message}`);
-};
+});
