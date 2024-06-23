@@ -1,9 +1,9 @@
 {
-  "name": "my-vercel-webhook",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node webhook.js"
+  },
   "dependencies": {
-    "ws": "^7.4.4"
+    "ws": "^8.5.0"  // Asegúrate de tener todas tus dependencias listadas aquí
   }
 }
