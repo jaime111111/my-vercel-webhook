@@ -6,7 +6,7 @@ const wsUrl = 'wss://us-pconnect7.coolkit.cc:443/api/ws';
 
 const authData = {
     action: "userOnline",
-    at: "8b3525e9d59091e923c8b8c32d33c5838aa7c7f0",
+    at: "f770e87d9ab658c41707ae4134b678302357b44c",
     apikey: "6dec5975-0c82-4530-b1c4-916ecd201f72",
     appid: "aSVwaZBBUJG5Q4jyuwYpaIgv81SGsxRc",
     nonce: Date.now().toString(),
