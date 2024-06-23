@@ -4,6 +4,6 @@
     "start": "node webhook.js"
   },
   "dependencies": {
-    "ws": "^8.5.0"  // Asegúrate de tener todas tus dependencias listadas aquí
+    "ws": "^8.5.0"  
   }
 }
